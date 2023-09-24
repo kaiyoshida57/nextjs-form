@@ -1,63 +1,47 @@
-import { useState } from "react";
+import Router from "next/router";
+import React from "react";
 
-export default function Home() {
-  const [values, setValues] = useState({
-    name: "",
-    email: "",
-    message: "",
-  });
+export default class Home extends React.Component {
+  render() {
+    const sendForm = async (event) => {
+      event.preventDefault();
 
-  const { name, email, message } = values;
-
-  const handleChange = (e) =>
-    setValues({ ...values, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      await fetch("http://localhost:3000/api/contact", {
-        method: "POST",
+      const res = await fetch("/api/send", {
+        body: JSON.stringify({
+          name: event.target.name.value,
+          email: event.target.email.value,
+          message: event.target.message.value,
+        }),
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(values),
+        method: "POST",
       });
-    } catch (err) {
-      console.log(err);
-    }
-  };
 
-  return (
-    <div>
-      <h2>NextJS + Sendgrid</h2>
-      <div className="container">
-        <form onSubmit={handleSubmit}>
-          <h3>Contact Form</h3>
+      if (res.ok) Router.push("/thanks");
+    };
 
-          <div className="container">
-            <input
-              type="text"
-              name="name"
-              value={name}
-              onChange={handleChange}
-            />
+    return (
+      <div className="container mx-auto px-4 my-4">
+        <h2 className="text-4xl font-bold text-[dodgerblue] underline ">
+          NextJS + Sendgrid
+        </h2>
+        <form onSubmit={sendForm} className="mt-[20px]">
+          <div className="mt-2">
+            <label htmlFor="name">名前</label>
+            <input type="text" name="name" />
           </div>
-          <div className="container">
-            <input
-              type="email"
-              name="email"
-              value={email}
-              onChange={handleChange}
-            />
+          <div className="mt-2">
+            <label htmlFor="email">メールアドレス</label>
+            <input type="text" name="email" />
           </div>
-          <div className="container">
-            <textarea name="message" value={message} onChange={handleChange} />
+          <div className="mt-2">
+            <label htmlFor="message">問い合わせ内容</label>
+            <textarea type="text" name="message" rows="4" />
           </div>
-          <div className="container">
-            <button>Send</button>
-          </div>
+          <button type="submit">送信</button>
         </form>
       </div>
-    </div>
-  );
+    );
+  }
 }
