@@ -37,17 +37,19 @@ a {
 label {
   vertical-align: top;
   display: block;
+  font-size: 20px;
 }
 input[type="text"],
 textarea {
   border: solid 1px #555;
   border-radius: 4px;
   width: 100%;
-  max-width: 400px;
+  padding: 4px 8px;
 }
 button {
-  background: #000;
-  padding: 4px 10px;
+  background-color: #fff;
+  padding: 4px 14px;
   border: solid 1px #555;
   border-radius: 4px;
+  font-size: 20px;
 }
