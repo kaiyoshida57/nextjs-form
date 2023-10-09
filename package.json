@@ -1,0 +1,22 @@
+{
+  "name": "nextjs-form",
+  "version": "1.0.0",
+  "description": "Practice for contact-form in NextJS",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kaiyoshida57/nextjs-form.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kaiyoshida57/nextjs-form/issues"
+  },
+  "homepage": "https://github.com/kaiyoshida57/nextjs-form#readme"
+}
